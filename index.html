@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#fff7f4">
+  <title>Для Ани — маленький уголок радости</title>
+  <style>
+    :root {
+      --ink: #422d48;
+      --muted: #826c82;
+      --rose: #eb8297;
+      --peach: #ffc8ad;
+      --cream: #fffaf5;
+      --lilac: #e8dcff;
+      --card: rgba(255, 255, 255, .78);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--ink);
+      font-family: "Segoe UI", system-ui, sans-serif;
+      background:
+        radial-gradient(circle at 10% 15%, #ffe2d5 0, transparent 26rem),
+        radial-gradient(circle at 90% 20%, #e8ddff 0, transparent 28rem),
+        linear-gradient(145deg, #fffaf5, #fff3f6 55%, #f7f1ff);
+      overflow-x: hidden;
+    }
+
+    .page { width: min(1060px, calc(100% - 32px)); margin: 0 auto; }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 24px 0;
+    }
+
+    .brand { display: flex; align-items: center; gap: 10px; font-weight: 800; }
+    .brand-mark { display: grid; place-items: center; width: 38px; height: 38px; border-radius: 14px; background: white; box-shadow: 0 8px 24px #d7a5b533; }
+    .top-note { color: var(--muted); font-size: 14px; }
+
+    .hero {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1.15fr .85fr;
+      align-items: center;
+      gap: 28px;
+      min-height: 510px;
+      padding: 44px 0 54px;
+    }
+
+    .eyebrow { color: #b15d78; font-weight: 750; letter-spacing: .08em; text-transform: uppercase; font-size: 12px; }
+    h1 { max-width: 650px; margin: 14px 0 18px; font-size: clamp(42px, 7vw, 76px); line-height: .98; letter-spacing: -.055em; }
+    h1 span { color: #d96783; }
+    .lead { max-width: 520px; margin: 0; color: var(--muted); font-size: clamp(17px, 2vw, 20px); line-height: 1.65; }
+
+    .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+    button, .bot-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      min-height: 52px;
+      padding: 0 20px;
+      border: 0;
+      border-radius: 17px;
+      font: inherit;
+      font-weight: 750;
+      text-decoration: none;
+      cursor: pointer;
+      transition: transform .18s ease, box-shadow .18s ease;
+    }
+    button:hover, .bot-link:hover { transform: translateY(-2px); }
+    button:active, .bot-link:active { transform: translateY(1px); }
+    .primary { color: white; background: linear-gradient(135deg, #e97491, #cd6d9f); box-shadow: 0 12px 24px #d56d8b3b; }
+    .secondary { color: #835b79; background: rgba(255,255,255,.8); box-shadow: 0 8px 22px #9f7da018; }
+
+    .art-wrap { display: grid; place-items: center; min-height: 340px; }
+    .art {
+      position: relative;
+      display: grid;
+      place-items: center;
+      width: min(340px, 78vw);
+      aspect-ratio: 1;
+      border: 1px solid #ffffffc9;
+      border-radius: 46% 54% 57% 43% / 43% 43% 57% 57%;
+      background: linear-gradient(145deg, #fff 8%, #ffe1e4 54%, #f3e6ff 100%);
+      box-shadow: 0 28px 70px #bd83a52b, inset 0 0 40px #fff9;
+      animation: float 5s ease-in-out infinite;
+    }
+    .art::before, .art::after { content: ""; position: absolute; border-radius: 50%; background: #fff8; }
+    .art::before { width: 45px; height: 45px; top: 12%; right: 19%; }
+    .art::after { width: 22px; height: 22px; bottom: 20%; left: 16%; }
+    .heart { font-size: clamp(110px, 20vw, 170px); filter: drop-shadow(0 18px 18px #cf668544); animation: beat 1.8s ease-in-out infinite; }
+    .orbit { position: absolute; inset: 8%; border: 1px dashed #d99bb680; border-radius: 50%; transform: rotate(-18deg); }
+    .spark { position: absolute; color: #bb86bb; font-size: 23px; }
+    .spark.one { top: 10%; left: 12%; }
+    .spark.two { right: 8%; bottom: 19%; font-size: 30px; }
+
+    .message-card {
+      position: relative;
+      width: min(660px, 100%);
+      margin: 0 auto 62px;
+      padding: 26px;
+      border: 1px solid #fff;
+      border-radius: 26px;
+      background: var(--card);
+      box-shadow: 0 20px 60px #9d73901c;
+      backdrop-filter: blur(14px);
+    }
+    .message-card h2 { margin: 0 0 8px; font-size: 20px; }
+    .message-card p { min-height: 54px; margin: 0; color: var(--muted); font-size: 18px; line-height: 1.55; }
+    .message-card button { margin-top: 16px; }
+    .tiny { color: #a08a9f; font-size: 12px; }
+
+    footer { padding: 0 0 28px; text-align: center; color: #99859a; font-size: 13px; }
+    .float-heart { position: fixed; z-index: -1; opacity: .35; animation: drift 9s ease-in-out infinite; }
+    .float-heart.a { top: 20%; left: 4%; font-size: 23px; }
+    .float-heart.b { top: 66%; right: 5%; font-size: 17px; animation-delay: -3s; }
+
+    @keyframes float { 0%,100% { transform: translateY(0) rotate(-2deg); } 50% { transform: translateY(-12px) rotate(2deg); } }
+    @keyframes beat { 0%,100% { transform: scale(1); } 50% { transform: scale(1.08); } }
+    @keyframes drift { 0%,100% { transform: translateY(0) rotate(0); } 50% { transform: translateY(-18px) rotate(12deg); } }
+
+    @media (max-width: 760px) {
+      header { padding: 18px 0; }
+      .top-note { display: none; }
+      .hero { grid-template-columns: 1fr; gap: 8px; min-height: auto; padding: 44px 0 36px; }
+      .art-wrap { grid-row: 1; min-height: 245px; }
+      .art { width: min(245px, 65vw); }
+      .hero-copy { text-align: center; }
+      .lead { margin: 0 auto; }
+      .actions { justify-content: center; }
+      .message-card { padding: 21px; margin-bottom: 42px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; }
+    }
+  </style>
+</head>
+<body>
+  <span class="float-heart a" aria-hidden="true">✦</span>
+  <span class="float-heart b" aria-hidden="true">♡</span>
+
+  <div class="page">
+    <header>
+      <div class="brand"><span class="brand-mark">🌷</span><span>Анюта · маленький сайт</span></div>
+      <div class="top-note">Сделано с теплом и капелькой магии ✨</div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="hero-copy">
+          <div class="eyebrow">Для самого тёплого человека</div>
+          <h1>Аня,<br><span>ты — чудо.</span></h1>
+          <p class="lead">Пусть здесь всегда найдётся добрая фраза, смешной сюрприз и напоминание о том, как ты важна.</p>
+          <div class="actions">
+            <button class="primary" id="surpriseButton" type="button">✨ Поймать комплимент</button>
+            <a class="bot-link secondary" id="botLink" href="https://t.me/anya_26_bot">💌 Открыть бота</a>
+          </div>
+        </div>
+        <div class="art-wrap" aria-hidden="true">
+          <div class="art">
+            <div class="orbit"></div>
+            <span class="spark one">✦</span>
+            <span class="spark two">✧</span>
+            <span class="heart">💖</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="message-card" aria-live="polite">
+        <h2>Твоё сообщение на сегодня 🌸</h2>
+        <p id="compliment">Нажми на кнопку — и здесь появится что-нибудь приятное.</p>
+        <button class="primary" id="anotherButton" type="button">Ещё одно!</button>
+      </section>
+    </main>
+
+    <footer>Пусть сегодня случится что-то хорошее ☀️</footer>
+  </div>
+
+  <script>
+    // Позже замени это значение на username бота без символа @.
+    const BOT_USERNAME = "anya_26_bot";
+
+    const compliments = [
+      "У тебя чудесная улыбка 😊",
+      "Ты умеешь делать обычный день особенным ✨",
+      "С тобой рядом становится теплее 💛",
+      "Ты очень добрая и красивая 🌷",
+      "Твой смех — моё любимое настроение 🎶",
+      "Ты настоящий лучик света ☀️",
+      "Мне очень повезло что ты есть 🥰",
+      "Ты особенная и неповторимая 💖",
+      "Пусть сегодня у тебя будет много поводов улыбнуться 🍓",
+      "Ты делаешь этот мир чуточку лучше 🌈"
+    ];
+
+    const complimentText = document.getElementById("compliment");
+    const surpriseButton = document.getElementById("surpriseButton");
+    const anotherButton = document.getElementById("anotherButton");
+    const botLink = document.getElementById("botLink");
+
+    function showCompliment() {
+      const next = compliments[Math.floor(Math.random() * compliments.length)];
+      complimentText.textContent = next;
+    }
+
+    surpriseButton.addEventListener("click", showCompliment);
+    anotherButton.addEventListener("click", showCompliment);
+
+    botLink.addEventListener("click", function (event) {
+      if (BOT_USERNAME === "YOUR_BOT_USERNAME") {
+        event.preventDefault();
+        alert("Скоро сюда добавим ссылку на Telegram-бота 😊");
+        return;
+      }
+
+      botLink.href = "https://t.me/" + BOT_USERNAME.replace(/^@/, "");
+    });
+  </script>
+</body>
+</html>
+
+
